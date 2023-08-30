@@ -11,13 +11,12 @@ HEADERS = {
    'content-type': "application/x-www-form-urlencoded"
    }
 
-@app.route('/')
-def health_check():
-   return 'Translation Service is up.'
-
-@app.route('/detect', methods=['POST', 'GET'])
+@app.route('/', methods=['GET'])
+#def health_check():
+  # return 'Translation Service is up.'
 def home():
    return render_template('index.html')
+@app.route('/detect', methods=['POST'])
 def detect():
    # parse args
    text = request.form.get('text')
