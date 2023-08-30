@@ -7,7 +7,7 @@ DETECT_BASE_URL = 'https://google-translate1.p.rapidapi.com/language/translate/v
 TRANSLATE_BASE_URL = 'https://google-translate1.p.rapidapi.com/language/translate/v2'
 HEADERS = {
    'x-rapidapi-host': "google-translate1.p.rapidapi.com",
-   'x-rapidapi-key': "KEVINSTEWARTTRANSLATOR_KEY",
+   'x-rapidapi-key': "a05c00c4dbmsh317b55c1e292f1ap1e71c0jsn7c5a67b49512",
    'content-type': "application/x-www-form-urlencoded"
    }
 
@@ -16,6 +16,8 @@ def health_check():
    return 'Translation Service is up.'
 
 @app.route('/detect', methods=['POST', 'GET'])
+def home():
+   return render_template('index.html')
 def detect():
    # parse args
    text = request.form.get('text')
