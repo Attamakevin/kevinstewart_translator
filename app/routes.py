@@ -5,7 +5,7 @@ from app import translate_text  # Import the function from app module
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    form = TranslateForm()
+    form = TranslateForm()  # Create an instance of the TranslateForm
     message = None
 
     if form.validate_on_submit():
@@ -20,4 +20,3 @@ def home():
             flash('Translation failed. Please try again later.')
 
     return render_template('index.html', title='Translate', form=form, message=message)
-
