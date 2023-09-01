@@ -5,7 +5,7 @@ from app import translate_text  # Import the function from app module
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    form = TranslateForm()  # Create an instance of the TranslateForm
+    form = TranslateForm()
     message = None
 
     if form.validate_on_submit():
