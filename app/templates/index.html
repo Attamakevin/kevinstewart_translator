@@ -40,13 +40,15 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-                <div class = "target-container">
 
-			<textarea class = "output" placeholder="Translation" readonly>{%translated.origin%}: {%translated.text%}</textarea>
+    	{% if translated %}
+	    <div class="target-container">
+    	<textarea class="output" placeholder="Translation" readonly>{{ translated.text }}</textarea>
+	{% endif%}
+    	<button id="clear-button">Clear Text</button>
+	</div>
 
-                    <button id="clear-button">Clear Text</button>
-
-                </div>
+ 
 
             </div>
 

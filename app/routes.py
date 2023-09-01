@@ -9,8 +9,10 @@ def translate():  # Renamed the function to lowercase
     if form.validate_on_submit():
         flash('Translation requested. Please wait.')  # Fixed the flash message
         translator_instance = Translator()  # Renamed the variable to avoid conflicts
-        translated = translator_instance.translate(form.translated_text.data, dest=form.target_language.data)  # Fixed form attribute access
-        return translated.text
+        translated = translator_instance.translate(form.translated_text.data, dest=form.target_language.data)
+        return render_template('index.html', translated=translated,  posts=posts)
+    return render_template('index.html',  form=form)
 
-    return render_template('index.html', title='Translate', form=form)
+
+
 
