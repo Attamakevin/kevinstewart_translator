@@ -11,6 +11,7 @@
 
 <body>
 	<h1 class="text-center py-5">Welcome To Kevinstewart Translator</h1>
+<<<<<<< HEAD
 
     <div class="container">
         <div class="row">
@@ -32,6 +33,46 @@
                         <p>{{ form.submit() }}</p>
                     </form>
                 </div>
+=======
+	 <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+		<h1>Lets get started</h1>
+        <div>Enter the text you wish to translate, choose the language, and click Translate button</div>
+        <div>
+            <form method="POST" action="" novalidate>
+
+                {{ form.hidden_tag() }}
+        <p>
+            {{ form.Translate_text.label }}<br>
+            {{ form.Translate_text(size=500) }}
+        </p>
+        <p>
+            {{ form.target_language.label }}<br>
+            {{ form.target_language(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+    	{% if translated %}
+	    <div class="target-container">
+    	<textarea class="output" placeholder="Translation" readonly>{{ translated.text }}</textarea>
+	{% endif%}
+    	<button id="clear-button">Clear Text</button>
+	</div>
+
+ 
+>>>>>>> 75553bc402193f943f710d9f2103b937d2a0c74c
 
                 <div class="target-container">
                     {% if message %}
