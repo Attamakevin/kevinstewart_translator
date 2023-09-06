@@ -1,0 +1,56 @@
+
+
+{% block content %}
+    <section class="welcome-section">
+        <h1>Welcome to KevinStewart Translator</h1>
+        <p class="beautiful-statement">Unlock a world of language with our powerful translation service.</p>
+        <div class="action-buttons">
+            <a href="/register" class="btn btn-primary" id="register-btn">Register</a>
+            <a href="/login" class="btn btn-secondary" id="login-btn">Login</a>
+        </div>
+	<div class="sign-up-options">
+    <p>Sign up with:</p>
+    <div class="social-sign-up">
+        <a href="/google-signup" class="social-option" id="google-signup">
+            <img src="{{ url_for('static', filename='google-icon.png') }}" alt="Google">
+            <p>Continue with Google</p>
+        </a>
+    </div>
+    <div class="social-sign-up">
+        <a href="/facebook-signup" class="social-option" id="facebook-signup">
+            <img src="{{ url_for('static', filename='facebook-icon.png') }}" alt="Facebook">
+            <p>Continue with Facebook</p>
+        </a>
+    </div>
+    <div class="social-sign-up">
+        <a href="/apple-signup" class="social-option" id="apple-signup">
+            <img src="{{ url_for('static', filename='apple-icon.png') }}" alt="Apple">
+            <p>Continue with Apple</p>
+        </a>
+    </div>
+</div>
+
+
+    </section>
+{% endblock %}
+
+<!-- Link to your CSS file -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+
+
+<!-- JavaScript for button click event -->
+<script>
+    // Get references to the Register and Login buttons
+    const registerButton = document.getElementById('register-btn');
+    const loginButton = document.getElementById('login-btn');
+
+    // Add click event listeners to the buttons
+    registerButton.addEventListener('click', function() {
+        alert('You clicked on Register!'); // Replace with your desired action
+    });
+
+    loginButton.addEventListener('click', function() {
+        alert('You clicked on Login!'); // Replace with your desired action
+    });
+</script>
+
