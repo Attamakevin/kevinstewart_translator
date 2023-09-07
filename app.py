@@ -28,7 +28,7 @@ def initialize_db():
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template('home.html')
-@app.route('/google/')
+@app.route('/google-login')
 def google():
 
     GOOGLE_CLIENT_ID = '160112374519-a963oshs8nfjk0ilecet0d42l8kubgig.apps.googleusercontent.com'
@@ -45,7 +45,7 @@ def google():
         }
     )
 # Redirect to google_auth function
-    redirect_uri = url_for('google_auth', _external=True)
+    redirect_uri = url_for('http://127.0.0.1:5000/google/auth', _external=True)
     print(redirect_uri)
     session['nonce'] = generate_token()
     return oauth.google.authorize_redirect(redirect_uri, nonce=session['nonce'])
