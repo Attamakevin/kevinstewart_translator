@@ -44,18 +44,19 @@ def google():
             'scope': 'openid email profile'
         }
     )
-# Redirect to google_auth function
-    redirect_uri = url_for('http://127.0.0.1:5000/google/auth', _external=True)
+
+    redirect_uri = url_for('google_auth', _external=True)
     print(redirect_uri)
     session['nonce'] = generate_token()
     return oauth.google.authorize_redirect(redirect_uri, nonce=session['nonce'])
+
 @app.route('/google/auth/')
 def google_auth():
     token = oauth.google.authorize_access_token()
     user = oauth.google.parse_id_token(token, nonce=session['nonce'])
     session['user'] = user
-    print(" Google User ", user)
-    return redirect('/')
+    print("Google User", user)
+    return redirect('/translate')  # Redirect to the /translate route
 
 
 
