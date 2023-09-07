@@ -40,11 +40,13 @@
 .btn-secondary {
     background-color: #ccc;
     color: #333;
-    padding: 15px 30px;
+    padding: 5px 3px;
     font-size: 18px;
     border: none;
     border-radius: 5px;
     text-decoration: none;
+    text-align: center;
+  
 }
 
 /* Hover effect for buttons */
@@ -93,6 +95,20 @@
 .social-option:hover {
   background-color: #f0f0f0;
 }
+
+/* Style for the footer */
+.footer {
+    background-color: #333; /* Dark background color */
+    color: white; /* Text color */
+    text-align: center;
+    padding: 20px 0; /* Add some padding top and bottom */
+}
+
+.footer p {
+    margin: 0; /* Remove default margin for <p> */
+    font-size: 14px; /* Adjust font size as needed */
+}
+
 
 
 
