@@ -5,8 +5,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Kevinstewart Translator</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<script>  function copy() {
+  var copyText = document.getElementById("myInput");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+	</script>
+<style>
+</style>
 </head>
 
 <body>
@@ -16,6 +31,7 @@
                  <div class="container"><a class="navbar-brand" href="#"><span>Language Translator</span> </a>
                 <div class="collapse navbar-collapse" id="navcol-1"></div><a href="/team">Team</a>
                 </div>
+	
         </nav>
     <div class="features-blue" style="height:157px;">
         <div class="container" style="height:73px;">
@@ -28,14 +44,26 @@
     <div class="newsletter-subscribe">
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-lg-6" style="background-color:grey;"> 
                     <form method="POST">
                         <!-- Enter text to translate. -->
                         <div class="form-group">
                             <label for="text-to-translate"><strong>Enter the text you'd like to
                                     translate:</strong></label>
-                            <textarea class="form-control" name="text-to-translate" id="text-to-translate"
-                                rows="5"></textarea>
+			     {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes" style="color:red;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+                            <textarea  style="background-color:white;"class="form-control" name="text-to-translate" id="text-to-translate"
+										    rows="4">
+</textarea>
+
                         </div>
                         <!-- Select output language here. -->
                         <div class="form-group">
@@ -62,6 +90,7 @@
                                 <option value="tr">Turkish</option>
                                 <option value="vi">Vietnamese</option>
                                 <option value="ig">Igbo</option>
+				<option value="yo">YORUBA</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary mb-2" id="translate">Translate text</button></br>
@@ -69,26 +98,18 @@
                     </form>
                     <!-- Translated text returned by the Translate API is rendered here. -->
                 </div>
-                <div class="col">
-                    <form>
-                        <div class="form-group" id="translator-text-response">
-                            <label for="translation-result"><strong>Translated text:</strong></label>
-                            <textarea readonly class="form-control" id="translation-result"
-                                rows="5">{{ translation_result }}</textarea>
-                        </div>
-                    </form>
-                    <form>
-                        <div class="form-group" id="translator-text-response">
-                            <label for="pronunciation"><strong>Pronunciation:</strong></label>
-                            <textarea readonly class="form-control" id="pronunciation-result"
-                                rows="5">{{ pronunciation }}</textarea>
-                        </div>
-                        <div class="form-group" id="translator-text-response">
-                            <label for="pronunciation"><strong>Confidence Level:</strong></label>
-                            <textarea readonly class="form-control" id="pronunciation-result"
-                                rows="5">{{ confidence_level }}</textarea>
-                        </div>
-                    </form>
+
+                <div  style="background-color:grey;"class="col-lg-6">
+                    <form method="POST" action="/voice">
+    <!-- Add other form fields as needed -->
+    <textarea  style="backgroung-color:white; height: 80%;" typie="text" name="translation-result" value="{{ translated_text }}" rows=6>{{ translated_text }}</textarea>
+    <select name="voices">
+        <option value="Male">Male Voice</option>
+        <option value="Female">Female Voice</option>
+    </select>
+    <button type="submit" value="Text to Speech">listen</button>
+</form>
+
                 </div>
             </div>
         </div>
@@ -120,8 +141,21 @@
             </footer>
         </div>
     </div>
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+       function copy() {
+  var copyText = document.getElementById("myInput");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+</script>
 </body>
 
 </html>
