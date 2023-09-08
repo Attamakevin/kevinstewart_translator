@@ -49,7 +49,7 @@
                         <!-- Enter text to translate. -->
                         <div class="form-group">
                             <label for="text-to-translate"><strong>Enter the text you'd like to
-                                    translate:</strong></label>
+					    translate: {{src_lang}}</strong></label>
 			     {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul class="flashes" style="color:red;">
@@ -101,20 +101,32 @@
 
                 <div  style="background-color:grey;"class="col-lg-6">
                     <form method="POST" action="/voice">
-    <!-- Add other form fields as needed -->
-    <textarea  style="backgroung-color:white; height: 80%;" typie="text" name="translation-result" value="{{ translated_text }}" rows=6>{{ translated_text }}</textarea>
+			     <div class="form-group">
+				     <label for="text-to-translate"><strong>TRANSLATED TEXT: {{target_lang}}</strong></label>
+                             {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes" style="color:red;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+   
+    <textarea  style="backgroung-color:white; height: 80%;" class="form-control"  typie="text" name="translation-result" value="{{ translated_text }}" rows="4">{{ translated_text }}</textarea>
     <select name="voices">
         <option value="Male">Male Voice</option>
         <option value="Female">Female Voice</option>
     </select>
     <button type="submit" value="Text to Speech">listen</button>
 </form>
-
+			     </div>
                 </div>
             </div>
         </div>
-        <div class="footer-dark">
- <footer>
+        <div class="footer-dark" style="height:30px;">
+ <footer style="background-color:cream; margin: 20px; border:10; ">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-md-3 item" style="width: 293px;">
@@ -123,20 +135,16 @@
                         <div class="col-sm-6 col-md-3 item">
                             <h3>About</h3>
                             <ul>
-                                <li></li>
                                 <li><a href="/team">Team</a></li>
-                                <li></li>
                             </ul>
                         </div>
-                        <div class="col-md-6 item text">
-                            <h3>Language Translate</h3>
+                        <div class="col-md-12" item "text">
+                           
                             <p>With the help of our application, you get a seamless
-                                experience of
-                                translating
-                                your sentences into different languages.</p>
+                                experience translating your sentences into different languages.</p>
                         </div>
-                    </div>
-                    <p class="copyright">Language Translator © 2023</p>
+                    </div style="float:right;">
+                    <p class="copyright">Kevinstewart_Translator © 2023</p>
                 </div>
             </footer>
         </div>

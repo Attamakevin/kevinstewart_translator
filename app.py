@@ -13,6 +13,9 @@ app.secret_key = 'YOUR_SECRET_KEY'  # Set your own secret key
 @app.route('/', methods=['GET', 'POST'])
 def translate():
     translated_text = ""
+    #src_lang=""
+    #target_lang=""
+
     if request.method == 'POST':
         try:
             text_to_translate = request.form.get("text-to-translate").lower()
@@ -27,6 +30,8 @@ def translate():
             # Access the translated text
             translated_text = result
         
+            #src_lang=result.src
+            # target_lang=result.target
         except Exception as e:
             print(e)
             translated_text = "ERROR: We are not able to handle your request right now"
