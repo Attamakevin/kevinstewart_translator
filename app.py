@@ -1,6 +1,8 @@
 from flask import render_template, Flask, flash, request,redirect,url_for, session
 from authlib.integrations.flask_client import OAuth
 from authlib.common.security import generate_token
+from flask_oauthlib.client import OAuth
+
 from flask_sqlalchemy import SQLAlchemy
 from forms import TranslateForm, RegistrationForm, LoginForm 
 from googletrans import Translator  # Corrected the import statement
@@ -28,7 +30,7 @@ def initialize_db():
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template('home.html')
-@app.route('/google-login')
+@app.route('/google/')
 def google():
 
     GOOGLE_CLIENT_ID = '160112374519-a963oshs8nfjk0ilecet0d42l8kubgig.apps.googleusercontent.com'
@@ -44,20 +46,49 @@ def google():
             'scope': 'openid email profile'
         }
     )
-
+        # Redirect to google_auth function
     redirect_uri = url_for('google_auth', _external=True)
     print(redirect_uri)
     session['nonce'] = generate_token()
     return oauth.google.authorize_redirect(redirect_uri, nonce=session['nonce'])
-
 @app.route('/google/auth/')
 def google_auth():
     token = oauth.google.authorize_access_token()
     user = oauth.google.parse_id_token(token, nonce=session['nonce'])
     session['user'] = user
-    print("Google User", user)
-    return redirect('/translate')  # Redirect to the /translate route
+    print(" Google User ", user)
+    return redirect('/translate')
+oauth = OAuth(app)
 
+oauth.register(
+    name='facebook',
+    client_id='1012852890148989',
+    client_secret='ec35018a592e13cc98ea565ce0417f74',
+    authorize_url='https://www.facebook.com/v3.3/dialog/oauth',
+    authorize_params=None,
+    authorize_params_handler=None,
+    authorize_client_handler=None,
+    authorize_request_token_params=None,
+    authorize_request_token_params_handler=None,
+    authorize_response=None,
+    authorize_token=None,
+    client_kwargs={'scope': 'email'},
+)
+@app.route('/facebook-login')
+def facebook():
+    redirect_uri = url_for('facebook_auth', _external=True)
+    session['nonce'] = generate_token()
+    return oauth.facebook.authorize_redirect(redirect_uri, nonce=session['nonce'])
+
+
+@app.route('/facebook/auth')
+def facebook_auth():
+    token = oauth.facebook.authorize_access_token()
+    user = oauth.facebook.parse_id_token(token, nonce=session['nonce'])
+    session['user'] = user
+    print("Facebook User", user)
+
+:wq
 
 
 
