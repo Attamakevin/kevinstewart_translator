@@ -76,7 +76,9 @@ def homepage():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
+    form = RegistrationForm(request.form)  # For registration route
+ 
+
 
     if form.validate_on_submit():
         username = form.username.data
@@ -101,7 +103,7 @@ def register():
     return render_template('register.html', form=form)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = LoginForm(request.form)
 
     if form.validate_on_submit():
         email = form.email.data
