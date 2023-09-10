@@ -3,29 +3,45 @@
 
 <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Kevinstewart Translator</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-	<script>  function copy() {
-  var copyText = document.getElementById("myInput");
 
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
-
-   // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
-
-  // Alert the copied text
-  alert("Copied the text: " + copyText.value);
-}
-	</script>
 <style>
 </style>
 </head>
 
 <body>
-        <h1 class="text-center py-5">Welcome To Kevinstewart Translator</h1>
+
+	<nav  class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Kevinstewart_Translator</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="True" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profile
+        </li>
+        
+    </div>
+  </div>
+</nav>
+	    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes" style="color:green;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+        <h2 class="text-center py-5" style="margin-top:10px;">Welcome To Kevinstewart Translator</h2>
 
          <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button">
                  <div class="container"><a class="navbar-brand" href="#"><span>Language Translator</span> </a>
@@ -37,7 +53,7 @@
         <div class="container" style="height:73px;">
             <div class="intro" style="height:85px;">
                 <h2 class="text-center" style="height:45px;">Features</h2>
-                <p class="text-center">Helps you translate any given sentences.</p>
+                <p class="text-center" style="margin-top:10px;">Helps you translate any given sentences.</p>
             </div>
         </div>
     </div>
@@ -48,19 +64,11 @@
                     <form method="POST">
                         <!-- Enter text to translate. -->
                         <div class="form-group">
-                            <label for="text-to-translate"><strong>Enter the text you'd like to
+                            <label for="text-to-translate" style="margin-top:10px;"><strong>Enter the text you'd like to
 					    translate: {{src_lang}}</strong></label>
-			     {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class="flashes" style="color:red;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+			     
 
-                            <textarea  style="background-color:white;"class="form-control" name="text-to-translate" id="text-to-translate"
+                            <textarea  style="background-color:white;"class="form-control" name="text-to-translate" id="text-to-translate" style="margin-top:10px;"
 										    rows="4">
 </textarea>
 
@@ -108,15 +116,6 @@
                     <form method="POST" action="/voice">
 			     <div class="form-group">
 				     <label for="text-to-translate"><strong>TRANSLATED TEXT: {{target_lang}}</strong></label>
-                             {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class="flashes" style="color:red;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
 
    
     <textarea  style="backgroung-color:white; height: 80%;" class="form-control"  typie="text" name="translation-result" value="{{ translated_text }}" rows="4">{{ translated_text }}</textarea>

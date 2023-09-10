@@ -1,25 +1,52 @@
-from flask import render_template, Flask, flash, request, jsonify, redirect, url_for
+from flask import render_template, flash, request, jsonify, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, validators
-from wtforms.validators import InputRequired, Email, Length
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired, Email, EqualTo,ValidationError
 from google.oauth2 import id_token
 from google.auth.transport import requests
-
-from forms import TranslateForm, RegistrationForm, LoginForm
+from flask_login import current_user, login_user
+from app.model import User
+from app import app
+#from app.forms import TranslateForm, RegistrationForm, LoginForm
 from googletrans import Translator
 from deep_translator import GoogleTranslator
 from flask_cors import cross_origin
 from models.speech import  text_to_speech
 from gtts import gTTS
+from app import db
 import os
 
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Register')
 
-app = Flask(__name__)
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different username.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different email address.')
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Sign In')
+
+
+#app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-db = SQLAlchemy(app)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+#db = SQLAlchemy(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -76,51 +103,34 @@ def homepage():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm(request.form)  # For registration route
- 
-
-
+    if current_user.is_authenticated:
+        return redirect('/login')
+    form = RegistrationForm()
     if form.validate_on_submit():
-        username = form.username.data
-        email = form.email.data
-        password = form.password.data
-
-        # Check if the user with this email already exists in the database
-        existing_user = User.query.filter_by(email=email).first()
-
-        if existing_user:
-            flash('Email address already registered. Please log in.')
-            return redirect(url_for('login'))
-
-        # If the email is not in use, create a new user
-        new_user = User(username=username, email=email, password=password)
-        db.session.add(new_user)
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
         db.session.commit()
-
-        flash('Registration successful! You can now log in.')
+        flash('Congratulations, you are now a registered user, please login to continue!')
         return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
 
-    return render_template('register.html', form=form)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm(request.form)
-
+    if current_user.is_authenticated:
+        return redirect('/login')
+    form = LoginForm()
     if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        return redirect('/')
+    return render_template('login.html', title='Sign In', form=form)
 
-        # Check if the provided email and password match a user in the database
-        user = User.query.filter_by(email=email, password=password).first()
-
-        if user:
-            flash('Login successful! Welcome back.')
-            return redirect(url_for('dashboard'))
-
-        flash('Invalid email or password. Please try again.')
-
-    return render_template('login.html', form=form)
 @app.route('/google-login', methods=['POST'])
-def google_login():
+def googlelogin():
     try:
         # Receive the ID token from the client
         id_token_received = request.json.get('idToken')
@@ -146,5 +156,5 @@ def google_login():
 
 
 if __name__ == '__main__':
-    db.create_all()
+ #   db.create_all()
     app.run(debug=True)
