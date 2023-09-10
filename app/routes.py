@@ -40,6 +40,17 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is None:
+            raise ValidationError('please check your username and try again, or register if not registered')
+
+    def validate_email(self, password):
+        user = User.query.filter_by(password=password.data).first()
+        if user is  None:
+            raise ValidationError('please check the password and try again')
+
+
 
 
 #app = Flask(__name__)
@@ -124,9 +135,13 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
+        
+
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
+        flash('You have succesfully login, welcome back {}'.format(user.username))
         return redirect('/')
+        
     return render_template('login.html', title='Sign In', form=form)
 
 @app.route('/google-login', methods=['POST'])
