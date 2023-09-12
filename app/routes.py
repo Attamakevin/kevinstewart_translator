@@ -16,6 +16,7 @@ from models.speech import  text_to_speech
 from gtts import gTTS
 from app import db
 import os
+from flask_login import login_required
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -59,8 +60,11 @@ app.secret_key = os.urandom(12)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 #db = SQLAlchemy(app)
 
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route("/")
+def dashboard():
+    return render_template('dashboard.html')
+@login_required
+@app.route('/home', methods=['GET', 'POST'])
 def translate():
     translated_text = ""
     #src_lang=""
@@ -87,7 +91,7 @@ def translate():
             translated_text = "ERROR: We are not able to handle your request right now"
 
     return render_template('index.html', translated_text=translated_text)
-
+@login_required
 @app.route('/voice', methods=['POST'])
 @cross_origin()
 def homepage():
@@ -102,7 +106,7 @@ def homepage():
             
         # Redirect to the main page or render it with a success message
         flash("Text converted to speech successfully!", 'success')
-        return redirect('/')
+        return redirect('/home')
     else:
         print(gender)
         print(e)
@@ -140,7 +144,7 @@ def login():
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         flash('You have succesfully login, welcome back {}'.format(user.username))
-        return redirect('/')
+        return redirect('/home')
         
     return render_template('login.html', title='Sign In', form=form)
 
