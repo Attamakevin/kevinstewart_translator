@@ -31,4 +31,5 @@ flask_wtf
 Config
 flask_migrate
 Werkzeug
+gunicorn
 
