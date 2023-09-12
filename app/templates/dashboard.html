@@ -1,42 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-    <div class="dashboard">
-        <div class="profile-section">
-            <div class="profile-picture">
-                <img src="profile-image.jpg" alt="User Profile Picture">
-            </div>
-            <div class="profile-details">
-                <h2 id="username">Username</h2>
-                <p id="email">Email: user@example.com</p>
-            </div>
-        </div>
-        
-        <div class="navigation-menu">
-            <ul>
-                <li><a href="#" id="home-link">Home</a></li>
-                <li><a href="#" id="messages-link">Messages</a></li>
-                <li><a href="#" id="notifications-link">Notifications</a></li>
-            </ul>
-        </div>
-        
-        <div class="content">
-            <h3>Welcome to Your Dashboard</h3>
-            <p>This is a simple dashboard with JavaScript interactivity.</p>
-        </div>
-        
-        <div class="register-button">
-            <a href="register.html">Register</a>
-        </div>
-    </div>
-    
-    <script src="dashboard.js"></script>
-</body>
-</html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ABOUT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Kevinstewart_Translator</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Login</a>
+        </li>
+        <li class="nav-item ">
+		<a class="nav-link" href="register.html">Get Started</a>
+	</li>
+	 <li class="nav-item ">
+                <a class="nav-link" href="about.html">About</a>
 
+        </li>
+	 <li class="nav-item ">
+                <a class="nav-link" href="team.html">Team</a>
+        </li>
+
+
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Video representation of kevinstewart_translator doing the translation magic with personalized user experience</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Video representation of the login process in the application for personalized user experience</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Video representation of the registration process in the application for personalized user experience<p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="container">
+  <div class="container overflow-hidden text-center">
+  <div class="row gy-5">
+    <div class="col-6">
+	    <div class="p-3"><h2>ABOUT</h2>
+	<p>Kevinstewart_Translator is a free Translator web App, personal translation web app for more than 50 languages with more being added, to translate text, notes, etc with both male and female voice pronounciation for effective language mastery and personalized records of previous use. More features will be added soon
+
+If you are searching for a simple and instant languages translator app to convert your text into any desired language. Don't worry just install "visit Kevinstewart_Translator" and get translation in almost all languages.</p>
+	    </div>
+    </div>
+    <div class="col-6">
+      <div class="p-3"><figure class="figure">
+  <img src="..." class="figure-img img-fluid rounded" alt="...">
+  <figcaption class="figure-caption text-end">picture of the main page image.</figcaption>
+</figure></div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
