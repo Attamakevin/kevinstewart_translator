@@ -5,7 +5,7 @@ click==8.1.7
 colorama==0.4.6
 Flask==2.3.3
 pip ==23.2.1
-Flask-SQLAlchemy==3.0.5
+Flask-SQLAlchemy
 googletrans==4.0.0rc1
 greenlet==2.0.2
 h11==0.9.0
@@ -27,7 +27,7 @@ flask_login
 flask_cors
 deep_translator
 flask_wtf
- flask_sqlalchemy 
+ 
 Configflask_migrate
 Werkzeug==2.3.7
 
