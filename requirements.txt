@@ -30,5 +30,5 @@ flask_wtf
  
 Config
 flask_migrate
-Werkzeug==2.3.7
+Werkzeug
 
