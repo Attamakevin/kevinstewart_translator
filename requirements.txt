@@ -28,6 +28,7 @@ flask_cors
 deep_translator
 flask_wtf
  
-Configflask_migrate
+Config
+flask_migrate
 Werkzeug==2.3.7
 
