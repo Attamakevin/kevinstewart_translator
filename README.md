@@ -76,6 +76,15 @@ While the current version of KevinStewart Translator is a testament to our commi
 7. **Integration with African Languages**: Africa's linguistic diversity is a treasure trove of culture and heritage. We aspire to integrate more African languages into our platform, preserving and celebrating this diversity.
 
 The future of KevinStewart Translator is a journey of exploration, innovation, and collaboration. We invite you to join us on this exciting road ahead, where language is no longer a barrier but a bridge that brings people together in the spirit of understanding and unity.
+## Screenshots
+![Homepage](app/img/pic1.png)
+
+![Register](app/img/pics3.png)
+
+![Home](app/img/pics5.png)
+
+
+
 ## Licensing
 Kevinstewart Translator is licensed under the MIT License. See the LICENSE file for details.
 
