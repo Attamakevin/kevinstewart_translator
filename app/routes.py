@@ -3,8 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo,ValidationError
-from google.oauth2 import id_token
-from google.auth.transport import requests
+#from google.oauth2 import id_token
+#from google.auth.transport import requests
 from flask_login import current_user, login_user
 from app.model import User
 from app import app
@@ -148,28 +148,28 @@ def login():
         
     return render_template('login.html', title='Sign In', form=form)
 
-@app.route('/google-login', methods=['POST'])
-def googlelogin():
-    try:
+#@app.route('/google-login', methods=['POST'])
+#def googlelogin():
+    #try:
         # Receive the ID token from the client
-        id_token_received = request.json.get('idToken')
+        #id_token_received = request.json.get('idToken')
 
         # Verify the ID token with Google's servers
-        id_info = id_token.verify_oauth2_token(id_token_received, requests.Request(), '160112374519-a963oshs8nfjk0ilecet0d42l8kubgig.apps.googleusercontent.com')
+       # id_info = id_token.verify_oauth2_token(id_token_received, requests.Request(), '160112374519-a963oshs8nfjk0ilecet0d42l8kubgig.apps.googleusercontent.com')
 
         # Extract user information from id_info
-        user_email = id_info['email']
+      #  user_email = id_info['email']
         # You can also extract other user information such as name, profile picture, etc. from id_info
 
         # Perform user registration or login based on the user_email
         # ...
 
         # Return a success response to the client
-        return jsonify({'message': 'Login successful'})
+     #   return jsonify({'message': 'Login successful'})
 
-    except ValueError as e:
+    #except ValueError as e:
         # Handle verification failure
-        return jsonify({'error': 'Invalid ID token'})
+       # return jsonify({'error': 'Invalid ID token'})
 
 #
 
