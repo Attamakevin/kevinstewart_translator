@@ -80,6 +80,7 @@ The future of KevinStewart Translator is a journey of exploration, innovation, a
 ![Homepage](app/img/pic1.png)
 
 ![Register](app/img/pics3.png)
+![Welcome Back](app/img/pics5.png)
 
 
 ## Licensing
