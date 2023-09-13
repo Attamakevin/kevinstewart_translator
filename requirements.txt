@@ -32,4 +32,5 @@ Config
 flask_migrate
 Werkzeug
 gunicorn
-
+ google.oauth2
+ pyttsx3
